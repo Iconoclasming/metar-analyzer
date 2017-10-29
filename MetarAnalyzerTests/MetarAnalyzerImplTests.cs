@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace MetarAnalyzerTests
 {
     [TestFixture]
-    public class MetarAnalyzerTests
+    public class MetarAnalyzerImplTests
     {
         #region Test cases
         [TestCase("METAR K13 141310Z=")]
@@ -33,7 +33,7 @@ namespace MetarAnalyzerTests
         #endregion
         public void Analyze_MessageContainsError_ReturnsNull(string message)
         {
-            var result = MetarAnalyzer.MetarAnalyzer.Analyze(message);
+            var result = MetarAnalyzerImpl.Analyze(message);
             Assert.IsNull(result);
         }
 
@@ -43,7 +43,7 @@ namespace MetarAnalyzerTests
         {
             var expectedObservationDateTime = new DateTime(1, 1, expectedDay, expectedHour, expectedMinute, 0,
                 DateTimeKind.Utc);
-            var result = MetarAnalyzer.MetarAnalyzer.Analyze(message);
+            var result = MetarAnalyzerImpl.Analyze(message);
             Assert.AreEqual(expectedObservationDateTime, result.ObservationDateTime);
         }
 
@@ -59,7 +59,7 @@ namespace MetarAnalyzerTests
                 new WindObservation.DirectionChangeValues(directionChangeFrom, directionChangeTo);
             var expectedWindObservation = new WindObservation(direction, new Speed(speed, speedUnit), gust,
                 expectedDirectionChange);
-            var result = MetarAnalyzer.MetarAnalyzer.Analyze(message);
+            var result = MetarAnalyzerImpl.Analyze(message);
             Assert.AreEqual(expectedWindObservation, result.Wind);
         }
     }

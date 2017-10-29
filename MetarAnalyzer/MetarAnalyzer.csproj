@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MetarAnalysisResult.cs" />
-    <Compile Include="MetarAnalyzer.cs" />
+    <Compile Include="MetarAnalyzerImpl.cs" />
     <Compile Include="MetarErrorListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Speed.cs" />

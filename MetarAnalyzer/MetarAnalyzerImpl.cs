@@ -3,7 +3,7 @@ using Antlr4.Runtime;
 
 namespace MetarAnalyzer
 {
-    public static class MetarAnalyzer
+    public static class MetarAnalyzerImpl
     {
         public static MetarAnalysisResult Analyze(string message)
         {
