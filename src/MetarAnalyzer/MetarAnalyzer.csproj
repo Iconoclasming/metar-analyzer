@@ -46,6 +46,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Speed.cs" />
     <Compile Include="ValidationResult.cs" />
+    <Compile Include="VisibilityObservation.cs" />
     <Compile Include="WindObservation.cs" />
   </ItemGroup>
   <ItemGroup>
