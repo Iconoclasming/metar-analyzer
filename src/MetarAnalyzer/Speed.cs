@@ -38,7 +38,7 @@
 
         public override string ToString()
         {
-            return $"{nameof(Value)}: {Value}, {nameof(Unit)}: {Unit}";
+            return $"{Value} {Unit.ToString().ToLower()}";
         }
     }
 }

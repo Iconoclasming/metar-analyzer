@@ -15,5 +15,14 @@ namespace MetarAnalyzer
             ObservationDateTime = observationDateTime;
             Index = index;
         }
+
+        public override string ToString()
+        {
+            return $"{nameof(ObservationDateTime)}: {ObservationDateTime}, " +
+                   $"{nameof(Index)}: {Index}, " +
+                   $"{nameof(Wind)}: {{{Wind}}}, " +
+                   $"{nameof(Visibility)}: {{{Visibility}}}, " +
+                   $"{nameof(CurrentWeather)}: {CurrentWeather}";
+        }
     }
 }
