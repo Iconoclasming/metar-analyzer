@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-using Antlr4.Runtime;
 using MetarAnalyzer;
 
 namespace MetarAnalyzerDemo
@@ -9,19 +8,15 @@ namespace MetarAnalyzerDemo
     {
         static void Main(string[] args)
         {
-            string input;
             var stringBuilder = new StringBuilder();
             Console.WriteLine("Input a METAR message:");
-            while ((input = Console.ReadLine()) != "\u0004")
+            stringBuilder.AppendLine(Console.ReadLine());;
+            var analysisResult = MetarAnalyzerImpl.Analyze(stringBuilder.ToString());
+            // ReSharper disable once ConvertIfStatementToConditionalTernaryExpression
+            if (analysisResult != null)
             {
-                stringBuilder.AppendLine(input);
+                Console.WriteLine(analysisResult.ToString());
             }
-            var inputStream = new AntlrInputStream(stringBuilder.ToString());
-            var lexer = new MetarLexer(inputStream);
-            var commonTokenStream = new CommonTokenStream(lexer);
-            var parser = new MetarParser(commonTokenStream);
-            var context = parser.message();
-            Console.WriteLine(context.GetText());
             Console.Read();
         }
     }

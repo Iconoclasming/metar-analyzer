@@ -41,7 +41,7 @@
 
         public override string ToString()
         {
-            return $"{nameof(Direction)}: {Direction}, {nameof(Speed)}: {{{Speed}}}, {nameof(Gust)}: {Gust}," +
+            return $"{nameof(Direction)}: {Direction}, {nameof(Speed)}: {Speed}, {nameof(Gust)}: {Gust}," +
                    $" {nameof(DirectionChange)}: {{{DirectionChange}}}";
         }
 

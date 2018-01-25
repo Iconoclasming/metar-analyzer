@@ -35,9 +35,9 @@ namespace MetarAnalyzer
 
         public override string ToString()
         {
-            return $"{nameof(VisibilityValue)}: {VisibilityValue}," +
-                $" {nameof(VisibilityHeight)}: {VisibilityHeight}," +
-                $" {nameof(VisibilityDirection)}: {VisibilityDirection}";
+            return $"{nameof(VisibilityValue)}: {VisibilityValue} m, " +
+                $"{nameof(VisibilityHeight)}: {VisibilityHeight} m, " +
+                $"{nameof(VisibilityDirection)}: {VisibilityDirection}";
         }
     }
 }
