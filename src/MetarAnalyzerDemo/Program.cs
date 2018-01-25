@@ -4,9 +4,9 @@ using MetarAnalyzer;
 
 namespace MetarAnalyzerDemo
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var stringBuilder = new StringBuilder();
             Console.WriteLine("Input a METAR message:");
