@@ -40,7 +40,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MetarAnalysisResult.cs" />
+    <Compile Include="AnalysisResult.cs" />
     <Compile Include="MetarAnalyzerImpl.cs" />
     <Compile Include="MetarErrorListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

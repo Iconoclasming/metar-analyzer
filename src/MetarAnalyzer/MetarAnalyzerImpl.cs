@@ -6,12 +6,12 @@ namespace MetarAnalyzer
 {
     public static class MetarAnalyzerImpl
     {
-        public static MetarAnalysisResult Analyze(string message)
+        public static AnalysisResult Analyze(string message)
         {
             return Analyze(message, out ValidationResult _);
         }
 
-        public static MetarAnalysisResult Analyze(string message, out ValidationResult validation)
+        public static AnalysisResult Analyze(string message, out ValidationResult validation)
         {
             var errorListener = new MetarErrorListener();
             validation = errorListener.ValidationResult;
@@ -35,7 +35,7 @@ namespace MetarAnalyzer
             var observationDateTime = new DateTime(1, 1, observationDay, observationHour, observationMinute, 0,
                 DateTimeKind.Utc);
             var index = context.header().WORD_ONLY_WITH_CHARS().GetText();
-            var result = new MetarAnalysisResult(observationDateTime, index);
+            var result = new AnalysisResult(observationDateTime, index);
             if (context.body_opt().body() != null)
             {
                 result.Wind = ParseWindObservation(context.body_opt().body().wind());

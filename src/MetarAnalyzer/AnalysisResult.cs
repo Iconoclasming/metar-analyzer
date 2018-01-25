@@ -2,7 +2,7 @@
 
 namespace MetarAnalyzer
 {
-    public class MetarAnalysisResult
+    public class AnalysisResult
     {
         public DateTime ObservationDateTime { get; }
         public string Index { get; }
@@ -10,7 +10,7 @@ namespace MetarAnalyzer
         public VisibilityObservation Visibility { get; set; }
         public string CurrentWeather { get; set; }
 
-        public MetarAnalysisResult(DateTime observationDateTime, string index)
+        public AnalysisResult(DateTime observationDateTime, string index)
         {
             ObservationDateTime = observationDateTime;
             Index = index;
