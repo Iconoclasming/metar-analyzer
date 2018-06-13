@@ -19,18 +19,19 @@
                 </Grid.RowDefinitions>
 
                 <ScrollViewer Grid.Row="0" Margin="3">
-                    <TextBox AcceptsReturn="True" TextWrapping="WrapWithOverflow" />
+                    <TextBox AcceptsReturn="True" TextWrapping="WrapWithOverflow" Text="{Binding Input, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </ScrollViewer>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="3">
-                    <Button Content="Parse" Width="75" />
+                    <Button Content="Parse" Width="75" Command="{Binding ParseCommand}" />
                 </StackPanel>
             </Grid>
         </GroupBox>
 
         <GroupBox Grid.Row="1" Header="Output">
             <ScrollViewer Grid.Row="0" Margin="3">
-                <TextBox AcceptsReturn="True" TextWrapping="WrapWithOverflow" IsReadOnly="True" />
+                <TextBox AcceptsReturn="True" TextWrapping="WrapWithOverflow" IsReadOnly="True"
+                         Text="{Binding Output, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </ScrollViewer>
         </GroupBox>
     </Grid>

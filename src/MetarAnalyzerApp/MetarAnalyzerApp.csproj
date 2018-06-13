@@ -54,6 +54,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Command\ActionCommand.cs" />
+    <Compile Include="Command\CancelCommandEventArgs.cs" />
+    <Compile Include="Command\CommandEventArgs.cs" />
     <Compile Include="ViewModel\MetarAnalyzerViewModel.cs" />
     <Compile Include="ViewModel\ViewModelManager.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
@@ -107,6 +110,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MetarAnalyzer\MetarAnalyzer.csproj">
+      <Project>{E6E877C0-2FFC-43CA-8C64-01A64D822C71}</Project>
+      <Name>MetarAnalyzer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

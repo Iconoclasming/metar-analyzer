@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Text.RegularExpressions;
 using Antlr4.Runtime;
 
@@ -16,33 +17,41 @@ namespace MetarAnalyzer
             var errorListener = new MetarErrorListener();
             validation = errorListener.ValidationResult;
 
-            var inputStream = new AntlrInputStream(message);
-            var lexer = new MetarLexer(inputStream);
-            lexer.AddErrorListener(errorListener);
-            var commonTokenStream = new CommonTokenStream(lexer);
-            var parser = new MetarParser(commonTokenStream);
-            parser.AddErrorListener(errorListener);
-
-            var context = parser.message();
-            if (errorListener.ValidationResult.Errors.Count > 0)
+            try
             {
+                var inputStream = new AntlrInputStream(message);
+                var lexer = new MetarLexer(inputStream);
+                lexer.AddErrorListener(errorListener);
+                var commonTokenStream = new CommonTokenStream(lexer);
+                var parser = new MetarParser(commonTokenStream);
+                parser.AddErrorListener(errorListener);
+
+                var context = parser.message();
+                if (errorListener.ValidationResult.Errors.Count > 0)
+                {
+                    return null;
+                }
+                var observationDateTimeStr = context.header().DATETIME().GetText();
+                var observationDay = int.Parse(observationDateTimeStr.Substring(0, 2));
+                var observationHour = int.Parse(observationDateTimeStr.Substring(2, 2));
+                var observationMinute = int.Parse(observationDateTimeStr.Substring(4, 2));
+                var observationDateTime = new DateTime(1, 1, observationDay, observationHour, observationMinute, 0,
+                    DateTimeKind.Utc);
+                var index = context.header().WORD_ONLY_WITH_CHARS().GetText();
+                var result = new AnalysisResult(observationDateTime, index);
+                if (context.body_opt().body() != null)
+                {
+                    result.Wind = ParseWindObservation(context.body_opt().body().wind());
+                    result.Visibility = ParseVisibilityObservation(context.body_opt().body().visibility_opt().visibility());
+                    result.CurrentWeather = ParseCurrentWeather(context.body_opt().body().current_weather_opt().current_weather());
+                }
+                return result;
+            }
+            catch(Exception ex)
+            {
+                validation.Errors.Add(ex.Message);
                 return null;
             }
-            var observationDateTimeStr = context.header().DATETIME().GetText();
-            var observationDay = int.Parse(observationDateTimeStr.Substring(0, 2));
-            var observationHour = int.Parse(observationDateTimeStr.Substring(2, 2));
-            var observationMinute = int.Parse(observationDateTimeStr.Substring(4, 2));
-            var observationDateTime = new DateTime(1, 1, observationDay, observationHour, observationMinute, 0,
-                DateTimeKind.Utc);
-            var index = context.header().WORD_ONLY_WITH_CHARS().GetText();
-            var result = new AnalysisResult(observationDateTime, index);
-            if (context.body_opt().body() != null)
-            {
-                result.Wind = ParseWindObservation(context.body_opt().body().wind());
-                result.Visibility = ParseVisibilityObservation(context.body_opt().body().visibility_opt().visibility());
-                result.CurrentWeather = ParseCurrentWeather(context.body_opt().body().current_weather_opt().current_weather());
-            }
-            return result;
         }
 
         private static WindObservation ParseWindObservation(MetarParser.WindContext windContext)
@@ -82,7 +91,7 @@ namespace MetarAnalyzer
             value = int.Parse(visibilityContext.VISIBILITY().GetText());
             var height = 0;
             var direction = string.Empty;
-            if (visibilityContext.visibility_direction_opt() != null)
+            if (visibilityContext.visibility_direction_opt().VISIBILITY_DIRECTION() != null)
             {
                 var regex = new Regex("(?<height>[0-9]{4,4})(?<direction>[A-Z]{2,2})");
                 var match = regex.Match(visibilityContext.visibility_direction_opt().VISIBILITY_DIRECTION().GetText());

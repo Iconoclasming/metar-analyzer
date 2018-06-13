@@ -18,10 +18,11 @@ namespace MetarAnalyzer
 
         public override string ToString()
         {
-            return $"{nameof(ObservationDateTime)}: {ObservationDateTime}, " +
-                   $"{nameof(Index)}: {Index}, " +
-                   $"{nameof(Wind)}: {{{Wind}}}, " +
-                   $"{nameof(Visibility)}: {{{Visibility}}}, " +
+            return $"{nameof(ObservationDateTime)}: " + ObservationDateTime.Day + " of current month, "
+                    + ObservationDateTime.ToString("hh:mm") + " GMT" + Environment.NewLine +
+                   $"{nameof(Index)}: {Index}, " + Environment.NewLine +
+                   $"{nameof(Wind)}: {{{Wind}}}, " + Environment.NewLine +
+                   $"{nameof(Visibility)}: {{{Visibility}}}, " + Environment.NewLine +
                    $"{nameof(CurrentWeather)}: {CurrentWeather}";
         }
     }
